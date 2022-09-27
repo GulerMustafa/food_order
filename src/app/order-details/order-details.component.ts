@@ -103,7 +103,7 @@ export class OrderDetailsComponent implements OnInit {
 
   step1(time: number) {
     this.clearSelections();
-    this.openSnackBar('Step 1 started', time);
+    this.openSnackBar('Step 1 start', time);
     from(this.orderInfo)
       .pipe(
         delay(time),

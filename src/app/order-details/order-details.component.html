@@ -1,0 +1,51 @@
+<div class="container">
+  <section
+    class="example-section"
+    style="display: flex; flex-direction: column"
+  >
+    <div *ngFor="let item of orderInfo">
+      <h4>{{ item.title | titlecase }}</h4>
+      <div *ngFor="let subItem of item.items; let i = index">
+        <mat-checkbox
+          (change)="burgerSelectionChange(item, i)"
+          [disabled]="subItem.disabled"
+          [(ngModel)]="subItem.selected"
+          >{{ subItem.name }}</mat-checkbox
+        >
+      </div>
+    </div>
+    <section *ngIf="orderInfo[1].items[0].selected" style="padding: 1rem 0">
+      <label>Kofte: </label>
+      <mat-radio-group [(ngModel)]="burgerRarity">
+        <mat-radio-button style="margin: 0 0.2rem" value="rare"
+          >Rare</mat-radio-button
+        >
+        <mat-radio-button style="margin: 0 0.2rem" value="medium"
+          >Medium</mat-radio-button
+        >
+        <mat-radio-button style="margin: 0 0.2rem" value="well"
+          >Well</mat-radio-button
+        >
+      </mat-radio-group>
+    </section>
+  </section>
+  <button
+    mat-raised-button
+    [disabled]="!burgerSelection"
+    style="margin-top: 0.5rem"
+    color="primary"
+    (click)="step1(1000)"
+  >
+    Order
+  </button>
+
+  <div
+    style="margin-top: 2rem; display: flex; flex-direction: column"
+    *ngIf="menuServed"
+  >
+    <h2>Customer Serving</h2>
+    <span> <b>Selected Toppings: </b>{{ this.selectedToppings }} </span>
+    <span> <b>Selected Burger: </b>{{ this.selectedBurger }} </span>
+    <span> <b>Selected Items: </b>{{ this.selectedSideItems }} </span>
+  </div>
+</div>
